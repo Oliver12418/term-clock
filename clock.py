@@ -111,6 +111,6 @@ while True:
             padding = (terminal_width - len(line)) // 2
         else:
             padding=0
-        print(f"\033[2m{' ' * padding + line}\033[0m")  # Center horizontally
+        print(f"\033[1m{' ' * padding + line}\033[0m")  # Center horizontally
 
     sleep(1)
