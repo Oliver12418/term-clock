@@ -110,9 +110,9 @@ while True:
 
     output_lines = [
         # Magical shit only god understands
-        f"{Numbers[int(f'{str(h).zfill(2)}'[0])].split(nl)[0]}{Numbers[int(f'{str(h).zfill(2)}'[1])].split(nl)[0]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[0]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[0]}   ",
-        f"{Numbers[int(f'{str(h).zfill(2)}'[0])].split(nl)[1]}{Numbers[int(f'{str(h).zfill(2)}'[1])].split(nl)[1]}    {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[1]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[1]}   ",
-        f"{Numbers[int(f'{str(h).zfill(2)}'[0])].split(nl)[2]}{Numbers[int(f'{str(h).zfill(2)}'[1])].split(nl)[2]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[2]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[2]}.{str(s).zfill(2)}",
+        f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[0]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[0]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0>2}'[0])].split(nl)[0]}{Numbers[int(f'{str(m):0>2}'[1])].split(nl)[0]}   ",
+        f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[1]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[1]}    {Numbers[int(f'{str(m):0>2}'[0])].split(nl)[1]}{Numbers[int(f'{str(m):0>2}'[1])].split(nl)[1]}   ",
+        f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[2]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[2]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0>2}'[0])].split(nl)[2]}{Numbers[int(f'{str(m):0>2}'[1])].split(nl)[2]}.{str(s):0>2}",
         f"{f'{str(date)} [{am_pm}]':^28}   "
     ]
 
