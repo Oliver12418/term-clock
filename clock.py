@@ -9,13 +9,14 @@ args = parser.parse_args()
 h = (int(ctime(time())[11:13])%12)
 m = int(ctime(time())[14:16])
 s = int(ctime(time())[17:19])
+am_pm=""
 date = f"{' '.join(ctime(time())[0:10].split())} {ctime(time())[20:24]}"
 centerd = args.center # Check if centering is enabled
 blinking = args.blinking
 Numbers = [
 
     # ASCII art for numbers 0 to 9
-
+    
     "\n".join([
         " /\"\\ ",
         " | | ",
@@ -82,28 +83,37 @@ nl="\n"
 n=1
 
 print(f"{h}:{m}:{s}")
-print("\x1b[2J")
+past_terminal_width, past_terminal_height=0,0
 Numbers[int(str(m)[0])].split(nl)[0]
 while True:
+    terminal_width, terminal_height = os.get_terminal_size()
+
+    if not terminal_width==past_terminal_width or not terminal_height==past_terminal_height:
+        print("\x1b[2J")
+
     if blinking:
         n+=1
     print("\x1b[0;0H")
-    h = int(ctime(time())[11:13]) % 12                                       # Hours
+    if int(ctime(time())[11:13]) > 12:
+        h=int(ctime(time())[11:13])-12                                       # Hours
+        am_pm="PM"
+    else:
+        h=int(ctime(time())[11:13])
+        am_pm="AM"
     m = int(ctime(time())[14:16])                                            # Minutes
     s = int(ctime(time())[17:19])                                            # Seconds
     date = f"{' '.join(ctime(time())[0:10].split())} {ctime(time())[20:24]}" # The date
 
-    terminal_width, terminal_height = os.get_terminal_size()
     vertical_center = (terminal_height - 4) // 2  # Adjust for 4 lines of output
     if centerd:
         print(f"{nl*(vertical_center-4)}")  # Move cursor to vertical center
 
     output_lines = [
         # Magical shit only god understands
-        f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[0]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[0]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[0]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[0]}   ",
-        f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[1]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[1]}    {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[1]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[1]}   ",
-        f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[2]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[2]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[2]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[2]}.{str(s):0>2}",
-        f"{str(date):^28}   "
+        f"{Numbers[int(f'{str(h).zfill(2)}'[0])].split(nl)[0]}{Numbers[int(f'{str(h).zfill(2)}'[1])].split(nl)[0]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[0]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[0]}   ",
+        f"{Numbers[int(f'{str(h).zfill(2)}'[0])].split(nl)[1]}{Numbers[int(f'{str(h).zfill(2)}'[1])].split(nl)[1]}    {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[1]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[1]}   ",
+        f"{Numbers[int(f'{str(h).zfill(2)}'[0])].split(nl)[2]}{Numbers[int(f'{str(h).zfill(2)}'[1])].split(nl)[2]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0<2}'[0])].split(nl)[2]}{Numbers[int(f'{str(m):0<2}'[1])].split(nl)[2]}.{str(s).zfill(2)}",
+        f"{f'{str(date)} [{am_pm}]':^28}   "
     ]
 
     for line in output_lines:
@@ -111,6 +121,7 @@ while True:
             padding = (terminal_width - len(line)) // 2
         else:
             padding=0
-        print(f"{' ' * padding + line}")  # Center horizontally
+        print(f"\033[2m{' ' * padding + line}\033[0m")  # Center horizontally
+    past_terminal_width, past_terminal_height = os.get_terminal_size()
 
     sleep(1)
