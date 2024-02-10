@@ -5,6 +5,7 @@ import argparse
 parser = argparse.ArgumentParser(description="A clock for your terminal")
 parser.add_argument("-b", "--blinking", action="store_true", help="Makes the colon blink")
 parser.add_argument("-c", "--center", action="store_true", help="Centers the clock")
+parser.add_argument("-d", "--color", type="int", help="color for the clock")
 args = parser.parse_args()
 h = (int(ctime(time())[11:13])%12)
 m = int(ctime(time())[14:16])
@@ -85,7 +86,7 @@ n=1
 print(f"{h}:{m}:{s}")
 past_terminal_width, past_terminal_height=0,0
 Numbers[int(str(m)[0])].split(nl)[0]
-print("\x1b[0;37m")
+print(f"\x1b[0;{args.color}m")
 while True:
     terminal_width, terminal_height = os.get_terminal_size()
 
