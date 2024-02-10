@@ -125,4 +125,4 @@ while True:
         print(f"{' ' * padding + line}")  # Center horizontally
     past_terminal_width, past_terminal_height = os.get_terminal_size()
 
-    sleep(1)
+    sleep(0.5)
