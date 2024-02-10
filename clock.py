@@ -31,7 +31,7 @@ Numbers = [
 
     "\n".join([
         " /\"\\ ",
-        "   / ",
+        "  _/ ",
         " /__ "
     ]),
 
@@ -49,18 +49,18 @@ Numbers = [
 
     "\n".join([
         " |\"\" ",
-        " '\"\\ ",
+        " '~. ",
         " \\_/ "
     ]),
 
     "\n".join([
-        " /\"\\ ",
-        " |/\\ ",
+        " /\"` ",
+        " |~, ",
         " \\_/ "
     ]),
 
     "\n".join([
-        " \"\"/ ",
+        "\"\"\"; ",
         "  /  ",
         " /   "
     ]),
@@ -73,8 +73,8 @@ Numbers = [
 
     "\n".join([
         " /\"\\ ",
-        " \\/| ",
-        "  _/ "
+        " `~| ",
+        " ._/ "
     ])
 
 ]
@@ -100,7 +100,7 @@ while True:
     else:
         h=int(ctime(time())[11:13])
         am_pm="AM"
-    m = int(ctime(time())[14:16])                                            # Minutes
+    m = 2                                            # Minutes
     s = int(ctime(time())[17:19])                                            # Seconds
     date = f"{' '.join(ctime(time())[0:10].split())} {ctime(time())[20:24]}" # The date
 
@@ -113,7 +113,7 @@ while True:
         f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[0]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[0]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0>2}'[0])].split(nl)[0]}{Numbers[int(f'{str(m):0>2}'[1])].split(nl)[0]}   ",
         f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[1]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[1]}    {Numbers[int(f'{str(m):0>2}'[0])].split(nl)[1]}{Numbers[int(f'{str(m):0>2}'[1])].split(nl)[1]}   ",
         f"{Numbers[int(f'{str(h):0>2}'[0])].split(nl)[2]}{Numbers[int(f'{str(h):0>2}'[1])].split(nl)[2]} {'<>'*(n%2)+'  '*((n+1)%2)} {Numbers[int(f'{str(m):0>2}'[0])].split(nl)[2]}{Numbers[int(f'{str(m):0>2}'[1])].split(nl)[2]}.{str(s):0>2}",
-        f"{f'{str(date)} [{am_pm}]':^28}   "
+        f"{'          '*centerd}\033[1m{f'{str(date)} [{am_pm}]':-^27}\033[0m "
     ]
 
     for line in output_lines:
@@ -121,7 +121,7 @@ while True:
             padding = (terminal_width - len(line)) // 2
         else:
             padding=0
-        print(f"\033[2m{' ' * padding + line}\033[0m")  # Center horizontally
+        print(f"{' ' * padding + line}")  # Center horizontally
     past_terminal_width, past_terminal_height = os.get_terminal_size()
 
     sleep(1)
