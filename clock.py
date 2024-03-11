@@ -85,7 +85,7 @@ n=1
 print(f"{h}:{m}:{s}")
 past_terminal_width, past_terminal_height=0,0
 Numbers[int(str(m)[0])].split(nl)[0]
-print("\x1b[0;47m")
+print("\x1b[0;0m")
 while True:
     terminal_width, terminal_height = os.get_terminal_size()
 
